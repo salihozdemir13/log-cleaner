@@ -40,7 +40,7 @@ then
         	echo "$TIMESTAMP [INFO] [$monitoringMountDisk disk usage --> $diskUsageBS]"
         	if [ $diskUsage -gt $diskThreshold ]
         	then
-               		printf "$TIMESTAMP [WARN] [!! LogCleaner is triggered, going to clean log files !!] \n"
+               	        printf "$TIMESTAMP [WARN] [!! LogCleaner is triggered, going to clean log files !!] \n"
                 	printf "$TIMESTAMP [INFO] [Extensions to be cleaned --> $fileExtensions] \n"
 
 			cp $LogCleanerPath/LogCleanerMailTemplate.html $LogCleanerPath/LogCleanerMail.html
