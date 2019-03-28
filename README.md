@@ -1,2 +1,1 @@
-# logcleaner
-Log Cleaner
+# LogCleaner
