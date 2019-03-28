@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Author: Salih Ozdemir | 2018
 
-# Stop script when an unexpected error occurs. Otherwise things can go really catastrophic!
+# Stop script when an unexpected error occurs.
 set -o errexit
 set -o pipefail
 
