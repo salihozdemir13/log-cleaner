@@ -12,9 +12,9 @@ propertiesFile=$LogCleanerPath/app.properties
 # Set Global Variables
 diskThresholdTemp=$(cat $propertiesFile | awk -F"=" '{print $2}' | awk "NR==1")
 maxFileAgeInDays=$(cat $propertiesFile | awk -F"=" '{print $2}' | awk "NR==2")
-logPathLocations=$(cat $propertiesFile | awk -F"=" '{print $2}' | awk "NR==3" | tr ',' ' ')
-fileExtensions=$(cat $propertiesFile | awk -F"=" '{print $2}' | awk "NR==4" | tr ',' ' ')
-monitoringMountDisks=$(cat $propertiesFile | awk -F"=" '{print $2}' | awk "NR==5" | tr ',' ' ')
+logPathLocations=$(cat $propertiesFile | awk -F"=" '{print $2}' | awk "NR==3" | sed 's/\,//g')
+fileExtensions=$(cat $propertiesFile | awk -F"=" '{print $2}' | awk "NR==4" | sed 's/\,//g')
+monitoringMountDisks=$(cat $propertiesFile | awk -F"=" '{print $2}' | awk "NR==5" | sed 's/\,//g')
 mailTOs=$(cat $propertiesFile | awk -F"=" '{print $2}' | awk "NR==6")
 domain="$(hostname)"
 
@@ -33,9 +33,9 @@ then
         do
                 monitoringMountDisk=$(echo $monitoringMountDisks | awk '{print $'$count'}')
                 
-		diskThreshold=$(cat $propertiesFile | awk -F"=" '{print $2}' | awk "NR==1" | tr '%' ' ')
+		diskThreshold=$(cat $propertiesFile | awk -F"=" '{print $2}' | awk "NR==1" | sed 's/\%//g')
 		diskUsageBS=$(df $monitoringMountDisk | grep $monitoringMountDisk | awk '{print $5}')
-	        diskUsage=$(echo $diskUsageBS | tr '%' ' ')
+	        diskUsage=$(echo $diskUsageBS | sed 's/\%//g')
 
         	echo "$TIMESTAMP [INFO] [$monitoringMountDisk disk usage --> $diskUsageBS]"
         	if [ $diskUsage -gt $diskThreshold ]
